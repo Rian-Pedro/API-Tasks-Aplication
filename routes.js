@@ -6,6 +6,7 @@ const JWTmiddleware = require('./middlewares/VerificaJWT');
 const jwt = require('jsonwebtoken');
 const User = require('./models/UserModel');
 const Task = require('./models/TaskModel');
+const { config } = require('dotenv');
 
 router.get('/login', JWTmiddleware.verify, async (req, res) => {
 
@@ -19,7 +20,7 @@ router.get('/login', JWTmiddleware.verify, async (req, res) => {
     }
   }
 
-  res.json({ token: jwt.sign({ name: user.user.name, id: user.user.id }, `${process.env.SECRET}`),
+  res.json({ token: jwt.sign({ name: user.user.name, id: user.user.id }, `${config().parsed.SECRET}`),
              userData: { name: user.user.name, id: user.user.id },
              permission: true });
 
@@ -39,7 +40,7 @@ router.post('/register', async (req, res) => {
     }
   }
 
-  let token = jwt.sign(data, `${process.env.SECRET}`);
+  let token = jwt.sign(data, `${config().parsed.SECRET}`);
 
   res.json({ token: token, 
              userData: data, 
