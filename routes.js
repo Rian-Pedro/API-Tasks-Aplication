@@ -2,8 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 
-const JSONdb = require('simple-json-db');
-
 const JWTmiddleware = require('./middlewares/VerificaJWT');
 const jwt = require('jsonwebtoken');
 const User = require('./models/UserModel');
