@@ -9,7 +9,7 @@ const Task = require('./models/TaskModel');
 
 router.get('/login', JWTmiddleware.verify, async (req, res) => {
 
-  const body = { email: req.headers.email, password: req.headers.password };
+  const body = { email: req.query.email, password: req.query.password };
   const user = new User(body);
   await user.login();
 
@@ -27,9 +27,9 @@ router.get('/login', JWTmiddleware.verify, async (req, res) => {
 
 router.post('/register', async (req, res) => {
 
-  const newUser = new User({ name: req.headers.name, 
-                             email: req.headers.email, 
-                             password: req.headers.password });
+  const newUser = new User({ name: req.query.name, 
+                             email: req.query.email, 
+                             password: req.query.password });
 
   const data = await newUser.register();
 
@@ -49,10 +49,10 @@ router.post('/register', async (req, res) => {
 
 router.post('/postTask', (req, res) => {
 
-  const task = new Task({ title: req.headers.title,
-                          dt_start: req.headers.dt_start,
-                          dt_to_end: req.headers.dt_to_end,
-                          id_maker: req.headers.id_maker })
+  const task = new Task({ title: req.query.title,
+                          dt_start: req.query.dt_start,
+                          dt_to_end: req.query.dt_to_end,
+                          id_maker: req.query.id_maker })
 
   task.post();
 
@@ -62,7 +62,7 @@ router.post('/postTask', (req, res) => {
 
 router.get('/getTasks', async (req, res) => {
 
-  res.json({ tasks: await Task.getTasks(req.headers.id_maker) })
+  res.json({ tasks: await Task.getTasks(req.query.id_maker) })
 
 })
 

@@ -5,13 +5,13 @@ const User = require('../models/UserModel');
 module.exports = {
   verify: async (req, res, next) => {
     
-    if(!req.headers.token) {
+    if(!req.query.token) {
       return next();
     }
     
     try {
 
-      const token = jwt.verify(req.headers.token, `${process.env.SECRET}`); // aumentar esse tempo maximo.
+      const token = jwt.verify(req.query.token, `${process.env.SECRET}`); // aumentar esse tempo maximo.
 
       if(!await User.getUser(token.id)) res.json({ permission: false });
 
