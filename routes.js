@@ -48,15 +48,18 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/postTask', (req, res) => {
+  try{
+    const task = new Task({ title: req.body.title,
+                            dt_start: req.body.dt_start,
+                            dt_to_end: req.body.dt_to_end,
+                            id_maker: req.body.id_maker })
 
-  const task = new Task({ title: req.body.title,
-                          dt_start: req.body.dt_start,
-                          dt_to_end: req.body.dt_to_end,
-                          id_maker: req.body.id_maker })
+    task.post();
 
-  task.post();
-
-  res.send('certo');
+    res.send('certo');
+  }catch(err){
+    res.send(err)
+  }
 
 });
 
