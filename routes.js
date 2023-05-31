@@ -48,7 +48,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/postTask', (req, res) => {
-  try{
+  
     const task = new Task({ title: req.body.title,
                             dt_start: req.body.dt_start,
                             dt_to_end: req.body.dt_to_end,
@@ -57,10 +57,6 @@ router.post('/postTask', (req, res) => {
     task.post();
 
     res.send('certo');
-  }catch(err){
-    res.send(err)
-  }
-
 });
 
 router.get('/getTasks', async (req, res) => {
