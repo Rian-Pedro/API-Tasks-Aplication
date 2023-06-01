@@ -47,19 +47,6 @@ router.post('/register', async (req, res) => {
 
 });
 
-router.post('/postTask', (req, res) => {
-
-  const task = new Task({ title: req.query.title,
-                          dt_start: req.query.dt_start,
-                          dt_to_end: req.query.dt_to_end,
-                          id_maker: req.query.id_maker })
-
-  task.post();
-
-  res.send('certo');
-
-});
-
 router.get('/getTasks', async (req, res) => {
 
   res.json({ tasks: await Task.getTasks(req.query.id_maker) })
