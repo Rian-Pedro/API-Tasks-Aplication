@@ -59,7 +59,7 @@ router.post('/postTask', (req, res) => {
 
     task.post();
 
-    res.send('certo');
+    res.json({ status: "certo" });
 });
 
 router.get('/getTasks', async (req, res) => {
