@@ -7,6 +7,9 @@ const jwt = require('jsonwebtoken');
 const User = require('./models/UserModel');
 const Task = require('./models/TaskModel');
 
+router.use(express.json());
+router.use(express.urlencoded({extended:true}));
+
 router.get('/login', JWTmiddleware.verify, async (req, res) => {
 
   const body = { email: req.query.email, password: req.query.password };
@@ -45,6 +48,17 @@ router.post('/register', async (req, res) => {
              userData: data, 
              permission: true });
 
+});
+
+router.post('/postTask', (req, res) => {
+  const task = new Task({ title: req.query.title,
+                          dt_start: req.query.dt_start,
+                          dt_to_end: req.query.dt_to_end,
+                          id_maker: req.query.id_maker });
+
+  task.post();
+
+  res.send('certo');
 });
 
 router.get('/getTasks', async (req, res) => {
