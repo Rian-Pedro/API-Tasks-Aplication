@@ -30,9 +30,9 @@ router.get('/login', JWTmiddleware.verify, async (req, res) => {
 
 router.post('/register', async (req, res) => {
 
-  const newUser = new User({ name: req.query.name, 
-                             email: req.query.email, 
-                             password: req.query.password });
+  const newUser = new User({ name: req.body.name, 
+                             email: req.body.email, 
+                             password: req.body.password });
 
   const data = await newUser.register();
 
