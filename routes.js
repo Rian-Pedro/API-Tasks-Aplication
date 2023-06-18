@@ -12,7 +12,7 @@ router.use(express.urlencoded({extended:true}));
 
 router.get('/login', JWTmiddleware.verify, async (req, res) => {
 
-  const body = { email: req.query.email, password: req.query.password };
+  const body = { email: req.body.email, password: req.body.password };
   const user = new User(body);
   await user.login();
 
@@ -64,7 +64,7 @@ router.post('/postTask', (req, res) => {
 
 router.get('/getTasks', async (req, res) => {
 
-  res.json({ tasks: await Task.getTasks(req.query.id_maker) })
+  res.json({ tasks: await Task.getTasks(req.body.id_maker) })
 
 })
 
