@@ -20,10 +20,17 @@ class Task {
   }
 
   static async getTasks(id) {
-
     return await taskModel.find({ id_maker: id });
-
   }
+
+  static async deleteTask(id_task) {
+    await taskModel.findByIdAndDelete(id_task);
+  }
+
+  static async getTaskById(id_task) {
+    return await taskModel.findById(id_task);
+  }
+
 }
 
 module.exports = Task;

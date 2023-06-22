@@ -62,6 +62,17 @@ router.post('/postTask', (req, res) => {
     res.json({ status: "certo" });
 });
 
+router.delete('/deleteTask', async (req, res) => {
+
+    if(!await Task.getTaskById(req.query.id_task)) {
+      return res.json({ error: 'task não existe' });
+    }
+
+    Task.deleteTask(req.query.id_task);
+    res.json({ msg: 'Task deletada com sucesso' });
+
+  });
+
 router.get('/getTasks', async (req, res) => {
 
   res.json({ tasks: await Task.getTasks(req.query.id_maker) })
