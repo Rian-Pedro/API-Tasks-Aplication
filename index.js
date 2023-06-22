@@ -7,9 +7,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const Task = require('./models/TaskModel');
 
-app.use(cors({
-  origin: 'https://master-task-pollar.vercel.app/'
-}));
 app.use(routes);
 
 mongoose.connect(`mongodb+srv://main:${process.env.PASSWORD}@api-task.hqglrla.mongodb.net/?retryWrites=true&w=majority`) 
