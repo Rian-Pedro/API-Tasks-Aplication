@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const Task = require('./models/TaskModel');
 
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: 'https://master-task-pollar.vercel.app/'
 }));
 app.use(routes);
 
